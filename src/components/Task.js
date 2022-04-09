@@ -9,7 +9,7 @@ const Li = styled.li`
   list-style: none;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid palevioletred;
+  border-bottom: 1px solid #d13f3f;
 `;
 
 const P = styled.p`

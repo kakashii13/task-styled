@@ -36,7 +36,12 @@ const CreateTask = () => {
     //   onKeyDown={({ key }) => handleEnter(key)}
     // />
     <CreateContainer>
-      <Input placeholder="title" />
+      <Input
+        placeholder="title"
+        onChange={({ target }) => setState(target.value)}
+        value={state}
+        onKeyDown={({ key }) => handleEnter(key)}
+      />
       <Input placeholder="description" description />
     </CreateContainer>
   );
