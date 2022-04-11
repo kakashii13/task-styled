@@ -6,11 +6,18 @@ export const useTaskContext = () => useContext(taskContext);
 
 const ContextProvider = ({ children }) => {
   const [taskList, setTaskList] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [state, setState] = useState("");
+
   return (
     <taskContext.Provider
       value={{
         taskList,
         setTaskList,
+        openModal,
+        setOpenModal,
+        state,
+        setState,
       }}
     >
       {children}

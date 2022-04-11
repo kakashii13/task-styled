@@ -11,7 +11,6 @@ const TaskList = () => {
   const { taskList } = useTaskContext();
   return (
     <Ul>
-      {" "}
       {taskList?.map((task) => (
         <Task
           key={task.id}

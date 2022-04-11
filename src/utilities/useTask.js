@@ -1,7 +1,13 @@
+import { useState } from "react";
 import { useTaskContext } from "../context/Context";
 
-const useTask = (id) => {
-  const { taskList, setTaskList } = useTaskContext();
+const useTask = (id, text) => {
+  const { taskList, setTaskList, state, setState, setOpenModal } =
+    useTaskContext();
+
+  const [openEdit, setOpenEdit] = useState(false);
+  const [stateEdit, setStateEdit] = useState("");
+
   const index = taskList.findIndex((task) => task.id === id);
   const newTask = [...taskList];
 
@@ -19,7 +25,6 @@ const useTask = (id) => {
     const newDate = new Date();
     const month = newDate.getMonth() + 1;
     const day = newDate.getDate();
-    console.log(day);
     const taskID = taskList.length + 1;
     newTask.push({
       id: taskID,
@@ -28,12 +33,35 @@ const useTask = (id) => {
       date: `${day}-${month}`,
     });
     setTaskList(newTask);
-    console.log("first");
   };
+
+  const handleEnter = (key) => {
+    if (key === "Enter") {
+      onAdd(state);
+      setState("");
+    }
+  };
+  const onEdit = () => {
+    const test = taskList.some((task) => task.id === id);
+    if (test) {
+      setOpenEdit(true);
+      setOpenModal(false);
+      setStateEdit(text);
+    }
+  };
+
   return {
     onAdd,
     onDelete,
     onComplete,
+    handleEnter,
+    state,
+    setState,
+    onEdit,
+    openEdit,
+    setOpenEdit,
+    stateEdit,
+    setStateEdit,
   };
 };
 

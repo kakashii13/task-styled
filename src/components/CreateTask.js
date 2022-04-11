@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useTaskContext } from "../context/Context";
 import useTask from "../utilities/useTask";
 
-const Input = styled.input`
+export const Input = styled.input`
   border: none;
   outline: none;
   font-size: 15px;
@@ -10,7 +11,7 @@ const Input = styled.input`
   height: ${(props) => (props.description ? "36px" : "auto")};
 `;
 
-const CreateContainer = styled.div`
+export const CreateContainer = styled.div`
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 8px;
@@ -19,30 +20,18 @@ const CreateContainer = styled.div`
 `;
 
 const CreateTask = () => {
-  const [state, setState] = useState("");
-  const { onAdd } = useTask();
-
-  const handleEnter = (key) => {
-    if (key === "Enter") {
-      onAdd(state);
-      setState("");
-    }
-  };
+  const { handleEnter } = useTask();
+  const { state, setState } = useTaskContext();
   return (
-    // <Input
-    //   placeholder="Create a new task..."
-    //   onChange={({ target }) => setState(target.value)}
-    //   value={state}
-    //   onKeyDown={({ key }) => handleEnter(key)}
-    // />
     <CreateContainer>
       <Input
-        placeholder="title"
+        autoFocus
+        placeholder="For ex. Read The Lord of the Rings"
         onChange={({ target }) => setState(target.value)}
         value={state}
         onKeyDown={({ key }) => handleEnter(key)}
       />
-      <Input placeholder="description" description />
+      <Input placeholder="Description" description />
     </CreateContainer>
   );
 };
