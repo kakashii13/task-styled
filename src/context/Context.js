@@ -7,7 +7,7 @@ export const useTaskContext = () => useContext(taskContext);
 const ContextProvider = ({ children }) => {
   const [taskList, setTaskList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const [state, setState] = useState("");
+  const [state, setState] = useState({ title: "", description: "" });
 
   return (
     <taskContext.Provider

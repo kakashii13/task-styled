@@ -12,7 +12,7 @@ const Nav = styled.nav`
 const NavBar = () => {
   return (
     <Nav>
-      <img src="https://icongr.am/material/home-outline.svg?size=25&color=ffffff" />
+      <img src="https://icongr.am/clarity/home.svg?size=25&color=ffffff" />
       <Search />
       <img src="https://icongr.am/clarity/moon.svg?size=21&color=ffffff" />
     </Nav>

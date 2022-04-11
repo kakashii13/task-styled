@@ -12,11 +12,12 @@ const MainContainer = styled.main`
 
 const AddTask = styled.div`
   display: flex;
+  align-items: center;
   // color: #d13f3f;
   cursor: pointer;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   padding: 7px 20px;
   margin: 10px 10px 10px 0;
   border: ${(props) => (props.primary ? "none" : "1px solid #ddd")};
@@ -43,8 +44,8 @@ const Main = () => {
     <MainContainer>
       {(!openModal && (
         <AddTask onClick={handleAdd}>
-          <span>+</span>
-          <p>Add task</p>
+          <img src="https://icongr.am/clarity/add.svg?size=22&color=d13f3f" />
+          <p style={{ margin: "0 10px", color: "#5c5c5c" }}>Add task</p>
         </AddTask>
       )) ||
         ""}

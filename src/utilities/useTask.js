@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useTaskContext } from "../context/Context";
 
-const useTask = (id, text) => {
+const useTask = (id, text, description) => {
   const { taskList, setTaskList, state, setState, setOpenModal } =
     useTaskContext();
 
   const [openEdit, setOpenEdit] = useState(false);
-  const [stateEdit, setStateEdit] = useState("");
+  const [stateEdit, setStateEdit] = useState({ title: "", description: "" });
 
   const index = taskList.findIndex((task) => task.id === id);
   const newTask = [...taskList];
@@ -21,24 +21,21 @@ const useTask = (id, text) => {
     setTaskList(newTask);
   };
 
-  const onAdd = (text) => {
-    const newDate = new Date();
-    const month = newDate.getMonth() + 1;
-    const day = newDate.getDate();
+  const onAdd = () => {
     const taskID = taskList.length + 1;
     newTask.push({
       id: taskID,
-      text: text,
+      title: state.title,
+      description: state.description,
       complete: false,
-      date: `${day}-${month}`,
     });
     setTaskList(newTask);
   };
 
   const handleEnter = (key) => {
     if (key === "Enter") {
-      onAdd(state);
-      setState("");
+      onAdd();
+      setState({ title: "", description: "" });
     }
   };
   const onEdit = () => {
@@ -46,8 +43,19 @@ const useTask = (id, text) => {
     if (test) {
       setOpenEdit(true);
       setOpenModal(false);
-      setStateEdit(text);
+      setStateEdit({
+        title: text,
+        description,
+      });
     }
+  };
+
+  const handleEdit = () => {
+    const taskIndex = taskList.findIndex((task) => task.id === id);
+    newTask[taskIndex].title = stateEdit.title;
+    newTask[taskIndex].description = stateEdit.description;
+    setTaskList(newTask);
+    setOpenEdit(false);
   };
 
   return {
@@ -62,6 +70,7 @@ const useTask = (id, text) => {
     setOpenEdit,
     stateEdit,
     setStateEdit,
+    handleEdit,
   };
 };
 

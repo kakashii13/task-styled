@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useTaskContext } from "../context/Context";
 import useTask from "../utilities/useTask";
 import { CreateContainer, Input } from "./CreateTask";
+import { Button } from "./Main";
 
 const Li = styled.li`
   width: auto;
@@ -27,7 +28,7 @@ const Div = styled.div`
   align-items: center;
 `;
 
-const Task = ({ text, id, complete }) => {
+const Task = ({ title, id, complete, description }) => {
   const {
     onComplete,
     onDelete,
@@ -36,21 +37,37 @@ const Task = ({ text, id, complete }) => {
     openEdit,
     stateEdit,
     setStateEdit,
-  } = useTask(id, text);
+    handleEdit,
+  } = useTask(id, title, description);
 
   return (
     <Li>
       {(openEdit && (
-        <CreateContainer>
-          <Input
-            autoFocus
-            placeholder="For ex. Read The Lord of the Rings"
-            onChange={({ target }) => setStateEdit(target.value)}
-            value={stateEdit}
-            onKeyDown={({ key }) => handleEnter(key)}
-          />
-          <Input placeholder="Description" description />
-        </CreateContainer>
+        <div>
+          <CreateContainer>
+            <Input
+              autoFocus
+              placeholder="For ex. Read The Lord of the Rings"
+              onChange={({ target }) =>
+                setStateEdit({ ...stateEdit, title: target.value })
+              }
+              value={stateEdit.title}
+              onKeyDown={({ key }) => handleEnter(key)}
+            />
+            <Input
+              placeholder="Description"
+              description
+              onChange={({ target }) =>
+                setStateEdit({ ...stateEdit, description: target.value })
+              }
+              value={stateEdit.description}
+            />
+          </CreateContainer>
+          <Button primary onClick={handleEdit}>
+            Save
+          </Button>
+          <Button>Cancel</Button>
+        </div>
       )) || (
         <Div>
           <Div>
@@ -62,7 +79,8 @@ const Task = ({ text, id, complete }) => {
                 "https://icongr.am/octicons/circle.svg?size=23&color=currentColor"
               }
             />
-            <P>{text}</P>
+            <P>{title}</P>
+            <P>{description}</P>
           </Div>
           <Div>
             <Img

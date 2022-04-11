@@ -14,10 +14,11 @@ const TaskList = () => {
       {taskList?.map((task) => (
         <Task
           key={task.id}
-          text={task.text}
+          title={task.title}
           complete={task.complete}
           id={task.id}
           date={task.date}
+          description={task.description}
         />
       ))}
     </Ul>

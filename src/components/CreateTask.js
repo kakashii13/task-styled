@@ -27,11 +27,18 @@ const CreateTask = () => {
       <Input
         autoFocus
         placeholder="For ex. Read The Lord of the Rings"
-        onChange={({ target }) => setState(target.value)}
-        value={state}
+        onChange={({ target }) => setState({ ...state, title: target.value })}
+        value={state.title}
         onKeyDown={({ key }) => handleEnter(key)}
       />
-      <Input placeholder="Description" description />
+      <Input
+        placeholder="Description"
+        description
+        onChange={({ target }) =>
+          setState({ ...state, description: target.value })
+        }
+        value={state.description}
+      />
     </CreateContainer>
   );
 };
