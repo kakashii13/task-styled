@@ -8,6 +8,7 @@ const ContextProvider = ({ children }) => {
   const [taskList, setTaskList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [state, setState] = useState({ title: "", description: "" });
+  const [tagList, setTagList] = useState([]);
 
   return (
     <taskContext.Provider
@@ -18,6 +19,8 @@ const ContextProvider = ({ children }) => {
         setOpenModal,
         state,
         setState,
+        tagList,
+        setTagList,
       }}
     >
       {children}

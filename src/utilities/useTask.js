@@ -2,11 +2,21 @@ import { useState } from "react";
 import { useTaskContext } from "../context/Context";
 
 const useTask = (id, text, description) => {
-  const { taskList, setTaskList, state, setState, setOpenModal } =
-    useTaskContext();
+  const {
+    taskList,
+    setTaskList,
+    state,
+    setState,
+    setOpenModal,
+    tagList,
+    setTagList,
+  } = useTaskContext();
 
   const [openEdit, setOpenEdit] = useState(false);
   const [stateEdit, setStateEdit] = useState({ title: "", description: "" });
+
+  const [openTag, setOpenTag] = useState(false);
+  const [tagState, setTagState] = useState("");
 
   const index = taskList.findIndex((task) => task.id === id);
   const newTask = [...taskList];
@@ -28,16 +38,18 @@ const useTask = (id, text, description) => {
       title: state.title,
       description: state.description,
       complete: false,
+      tags: "",
     });
     setTaskList(newTask);
   };
 
   const handleEnter = (key) => {
-    if (key === "Enter") {
+    if (key === "Enter" && state.title != "") {
       onAdd();
       setState({ title: "", description: "" });
     }
   };
+
   const onEdit = () => {
     const test = taskList.some((task) => task.id === id);
     if (test) {
@@ -58,6 +70,28 @@ const useTask = (id, text, description) => {
     setOpenEdit(false);
   };
 
+  const handleTag = () => {
+    const test = taskList.some((task) => task.id === id);
+    if (test) {
+      setOpenTag((prevState) => !prevState);
+    }
+  };
+
+  const addTag = () => {
+    const isTag = tagList.some((x) => x == tagState);
+    if (tagState == "" || isTag) return;
+    const newTagList = [...tagList];
+    newTagList.push(tagState);
+    setTagList(newTagList);
+    setTagState("");
+  };
+
+  const selectTag = (tag, id) => {
+    const taskIndex = taskList.findIndex((task) => task.id === id);
+    newTask[taskIndex].tags = tag;
+    setTaskList(newTask);
+  };
+
   return {
     onAdd,
     onDelete,
@@ -71,6 +105,13 @@ const useTask = (id, text, description) => {
     stateEdit,
     setStateEdit,
     handleEdit,
+    openTag,
+    setOpenTag,
+    handleTag,
+    addTag,
+    setTagState,
+    tagState,
+    selectTag,
   };
 };
 

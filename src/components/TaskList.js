@@ -19,6 +19,7 @@ const TaskList = () => {
           id={task.id}
           date={task.date}
           description={task.description}
+          tags={task.tags}
         />
       ))}
     </Ul>
