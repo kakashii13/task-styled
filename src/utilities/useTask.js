@@ -12,7 +12,7 @@ const useTask = (id, text, description) => {
   const newTask = [...taskList];
 
   const onComplete = () => {
-    newTask[index].complete = true;
+    newTask[index].complete = !newTask[index].complete;
     setTaskList(newTask);
   };
 

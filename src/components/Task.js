@@ -14,7 +14,9 @@ const Li = styled.li`
 `;
 
 const P = styled.p`
-  margin: 10px;
+  margin: 0 10px;
+  font-size: ${(props) => (props.description ? "12px" : "14px")};
+  color: ${(props) => (props.description ? "#888888" : "#000")};
 `;
 
 const Img = styled.img`
@@ -24,8 +26,9 @@ const Img = styled.img`
 
 const Div = styled.div`
   display: flex;
+  flex-direction: ${(props) => (props.text ? "column" : "row")};
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
 `;
 
 const Task = ({ title, id, complete, description }) => {
@@ -38,6 +41,7 @@ const Task = ({ title, id, complete, description }) => {
     stateEdit,
     setStateEdit,
     handleEdit,
+    setOpenEdit,
   } = useTask(id, title, description);
 
   return (
@@ -66,7 +70,7 @@ const Task = ({ title, id, complete, description }) => {
           <Button primary onClick={handleEdit}>
             Save
           </Button>
-          <Button>Cancel</Button>
+          <Button onClick={() => setOpenEdit(false)}>Cancel</Button>
         </div>
       )) || (
         <Div>
@@ -79,14 +83,17 @@ const Task = ({ title, id, complete, description }) => {
                 "https://icongr.am/octicons/circle.svg?size=23&color=currentColor"
               }
             />
-            <P>{title}</P>
-            <P>{description}</P>
+            <Div text>
+              <P>{title}</P>
+              <P description>{description}</P>
+            </Div>
           </Div>
           <Div>
             <Img
               onClick={onEdit}
               src="https://icongr.am/clarity/edit.svg?size=22&color=currentColor"
             />
+            <Img src="https://icongr.am/clarity/tag.svg?size=16&color=currentColor" />
             <Img
               onClick={onDelete}
               src="https://icongr.am/fontawesome/trash-o.svg?size=22&color=currentColor"
