@@ -9,7 +9,8 @@ const SideContainer = styled.div`
 `;
 
 const SideBar = () => {
-  const { tagList, setTagList } = useTaskContext();
+  const { tagList } = useTaskContext();
+
   return (
     <SideContainer>
       <h2>Categories</h2>

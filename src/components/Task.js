@@ -104,7 +104,11 @@ const Task = ({ title, id, complete, description, tags }) => {
                   style={{ width: "11px", marginRight: "2px" }}
                   src="https://icongr.am/clarity/tag.svg?size=5&color=currentColor"
                 />
-                <span style={{ verticalAlign: "center" }}>{tags}</span>
+                <ul>
+                  {tags.map((tag) => (
+                    <li key={tag}>{tag}</li>
+                  ))}
+                </ul>
               </Div>
             </Div>
           </Div>

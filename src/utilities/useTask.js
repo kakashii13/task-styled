@@ -38,7 +38,7 @@ const useTask = (id, text, description) => {
       title: state.title,
       description: state.description,
       complete: false,
-      tags: "",
+      tags: [],
     });
     setTaskList(newTask);
   };
@@ -86,10 +86,29 @@ const useTask = (id, text, description) => {
     setTagState("");
   };
 
-  const selectTag = (tag, id) => {
+  const selectTag = (tag, id, target) => {
+    // filtro por cada id
     const taskIndex = taskList.findIndex((task) => task.id === id);
-    newTask[taskIndex].tags = tag;
-    setTaskList(newTask);
+    // chequeo que el tag ya exista
+    const filter = taskList
+      .filter((task) => task.id === id)[0]
+      .tags.includes(tag);
+    // chequeo que no exista tag
+    const filter1 =
+      taskList.filter((task) => task.id === id)[0].tags.length == 0;
+
+    // if (!filter1) return;
+    if (target.checked == false) return;
+
+    if (filter1) {
+      newTask[taskIndex].tags.push(tag);
+      setTaskList(newTask);
+    } else {
+      if (!filter) {
+        newTask[taskIndex].tags.push(tag);
+        setTaskList(newTask);
+      } else return;
+    }
   };
 
   return {

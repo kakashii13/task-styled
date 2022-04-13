@@ -38,7 +38,10 @@ const Tag = ({ id }) => {
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
                 <div>{tag}</div>
-                <input onClick={() => selectTag(tag, id)} type="checkbox" />
+                <input
+                  onClick={({ target }) => selectTag(tag, id, target)}
+                  type="checkbox"
+                />
               </li>
             ))}
       </ul>
