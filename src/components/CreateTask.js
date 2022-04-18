@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useTaskContext } from "../context/Context";
-import useTask from "../utilities/useTask";
+import useTask from "../hooks/useTask";
 
 export const Input = styled.input`
   border: none;
@@ -17,6 +17,7 @@ export const CreateContainer = styled.div`
   padding: 8px;
   display: flex;
   flex-direction: column;
+  background: #fff;
 `;
 
 const CreateTask = () => {

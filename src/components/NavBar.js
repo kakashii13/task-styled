@@ -3,10 +3,11 @@ import styled from "styled-components";
 import Search from "./Search";
 
 const Nav = styled.nav`
-  background-color: #d13f3f;
+  background-color: #344955;
   color: #ffffff;
   padding: 15px;
   display: flex;
+  justify-content: space-between;
 `;
 
 const NavBar = () => {

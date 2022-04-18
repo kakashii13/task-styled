@@ -1,19 +1,13 @@
 import styled from "styled-components";
 
-const Btn = styled.button`
-  padding: 10px 20px;
-  margin: 10px;
-  background: palevioletred;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  width: 100px;
-  cursor: pointer;
+export const Button = styled.button`
+  padding: 7px 20px;
+  margin: 10px 10px 10px 0;
+  border: ${(props) => (props.primary ? "none" : "1px solid #ddd")};
+  border-radius: 3px;
+  background-color: ${(props) => (props.primary ? "#f9aa33" : "#fff")};
+  color: #232f34;
+  font-weight: bold;
   font-size: 15px;
+  cursor: pointer;
 `;
-
-const Button = () => {
-  return <Btn>Add</Btn>;
-};
-
-export default Button;

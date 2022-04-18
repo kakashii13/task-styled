@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useTaskContext } from "../context/Context";
-import useTask from "../utilities/useTask";
+import useTask from "../hooks/useTask";
 import { Input } from "./CreateTask";
 
 const InputTag = styled.div`
