@@ -13,8 +13,12 @@ const MainContainer = styled.main`
 const AddTask = styled.div`
   display: flex;
   align-items: center;
-  // color: #d13f3f;
+  color: #5c5c5c;
   cursor: pointer;
+
+  &:hover {
+    color: #d13f3f;
+  }
 `;
 
 export const Button = styled.button`
@@ -31,6 +35,7 @@ export const Button = styled.button`
 
 const Main = () => {
   const { openModal, setOpenModal } = useTaskContext();
+  const { onAdd } = useTask();
 
   const handleAdd = () => {
     setOpenModal(true);
@@ -45,14 +50,16 @@ const Main = () => {
       {(!openModal && (
         <AddTask onClick={handleAdd}>
           <img src="https://icongr.am/clarity/add.svg?size=22&color=d13f3f" />
-          <p style={{ margin: "0 10px", color: "#5c5c5c" }}>Add task</p>
+          <p style={{ margin: "0 10px" }}>Add task</p>
         </AddTask>
       )) ||
         ""}
       {(openModal && (
         <div>
           <CreateTask />
-          <Button primary>Add task</Button>
+          <Button primary onClick={onAdd}>
+            Add task
+          </Button>
           <Button onClick={handleCancel}>Cancel</Button>
         </div>
       )) ||

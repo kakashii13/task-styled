@@ -41,12 +41,12 @@ const useTask = (id, text, description) => {
       tags: [],
     });
     setTaskList(newTask);
+    setState({ title: "", description: "" });
   };
 
   const handleEnter = (key) => {
     if (key === "Enter" && state.title != "") {
       onAdd();
-      setState({ title: "", description: "" });
     }
   };
 
@@ -70,7 +70,7 @@ const useTask = (id, text, description) => {
     setOpenEdit(false);
   };
 
-  const handleTag = () => {
+  const handleTag = (e) => {
     const test = taskList.some((task) => task.id === id);
     if (test) {
       setOpenTag((prevState) => !prevState);

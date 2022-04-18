@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useTaskContext } from "../context/Context";
 import useTask from "../utilities/useTask";
@@ -25,6 +25,12 @@ const P = styled.p`
 const Img = styled.img`
   cursor: pointer;
   width: 20px;
+  padding: 0 2px;
+
+  &:hover {
+    background: #d7d7d7;
+    border-radius: 3px;
+  }
 `;
 
 const Div = styled.div`
@@ -48,7 +54,22 @@ const Task = ({ title, id, complete, description, tags }) => {
     setOpenEdit,
     openTag,
     handleTag,
+    setOpenTag,
   } = useTask(id, title, description);
+
+  const btnRef = useRef();
+
+  useEffect(() => {
+    const closeTag = (e) => {
+      if (e.path[0] !== btnRef.current) {
+        setOpenTag(false);
+      }
+    };
+
+    document.body.addEventListener("click", closeTag);
+
+    return () => document.body.removeEventListener("click", closeTag);
+  }, []);
 
   return (
     <Li>
@@ -100,15 +121,23 @@ const Task = ({ title, id, complete, description, tags }) => {
                   color: "#707070",
                 }}
               >
-                <Img
-                  style={{ width: "11px", marginRight: "2px" }}
-                  src="https://icongr.am/clarity/tag.svg?size=5&color=currentColor"
-                />
-                <ul>
-                  {tags.map((tag) => (
-                    <li key={tag}>{tag}</li>
-                  ))}
-                </ul>
+                {tags.length != 0 ? (
+                  <Div style={{ alignItems: "center" }}>
+                    <Img
+                      style={{ width: "11px", marginRight: "2px" }}
+                      src="https://icongr.am/clarity/tag.svg?size=5&color=currentColor"
+                    />
+                    <Div>
+                      {tags.map((tag) => (
+                        <li style={{ marginRight: "5px" }} key={tag}>
+                          {tag}
+                        </li>
+                      ))}
+                    </Div>
+                  </Div>
+                ) : (
+                  ""
+                )}
               </Div>
             </Div>
           </Div>
@@ -118,6 +147,7 @@ const Task = ({ title, id, complete, description, tags }) => {
               src="https://icongr.am/clarity/edit.svg?size=22&color=currentColor"
             />
             <Img
+              ref={btnRef}
               onClick={handleTag}
               src="https://icongr.am/clarity/tag.svg?size=16&color=currentColor"
             />

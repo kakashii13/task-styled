@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useTaskContext } from "../context/Context";
 import useTask from "../utilities/useTask";
@@ -6,6 +6,7 @@ import { Input } from "./CreateTask";
 
 const InputTag = styled.div`
   width: 250px;
+  padding: 3px 10px;
   position: absolute;
   top: 30px;
   right: 0;
@@ -15,11 +16,12 @@ const InputTag = styled.div`
   flex-direction: column;
   z-index: 10;
   background: #fff;
+  cursor: pointer;
 `;
 
 const Tag = ({ id }) => {
   const { tagList } = useTaskContext();
-  const { addTag, setTagState, tagState, selectTag } = useTask();
+  const { addTag, setTagState, tagState, selectTag, setOpenTag } = useTask();
 
   return (
     <InputTag>
@@ -35,7 +37,11 @@ const Tag = ({ id }) => {
           : tagList.map((tag) => (
               <li
                 key={tag}
-                style={{ display: "flex", justifyContent: "space-between" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "5px 0",
+                }}
               >
                 <div>{tag}</div>
                 <input

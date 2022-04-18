@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useTaskContext } from "../context/Context";
 
 const SideContainer = styled.div`
   background-color: #fafafa;
-  width: 245px;
+  width: 30%;
   padding: 15px 0 0 15px;
 `;
 
@@ -14,11 +15,16 @@ const SideBar = () => {
   return (
     <SideContainer>
       <h2>Categories</h2>
-      <div>
+      <ul style={{ cursor: "pointer" }}>
+        <li>
+          <Link to="/">All</Link>
+        </li>
         {tagList.map((tag) => (
-          <li key={tag}>{tag}</li>
+          <li key={tag}>
+            <Link to={`/${tag}`}>{tag}</Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </SideContainer>
   );
 };
