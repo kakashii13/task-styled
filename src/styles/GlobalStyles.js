@@ -24,7 +24,7 @@ export const GlobalStyles = createGlobalStyle`
         color: #000;
     }
 
-    button {
+    button, input {
         background: transparent;
         border: 0; 
         outline: none;

@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const CategoryContainer = styled.div`
   padding: 15px;
   background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Title = styled.h2`

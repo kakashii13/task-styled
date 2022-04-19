@@ -20,7 +20,7 @@ const Search = () => {
   return (
     <SearchedBar>
       <img src="https://icongr.am/clarity/search.svg?size=18&color=000000" />
-      <InputSearch placeholder="Buscar" />
+      <InputSearch placeholder="Search task..." />
     </SearchedBar>
   );
 };

@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import useTask from "../../hooks/useTask";
-import { CreateContainer, Input } from "../CreateTask";
+import { CreateContainer, Input } from "../Modal/styles";
 import { Button } from "../Button";
 import Tag from "../Tag";
 import { Div, Img, P, Li } from "./style";
+import { BsPatchCheckFill, BsPatchCheck } from "react-icons/bs";
+import { useTaskContext } from "../../context/Context";
 
 const Task = ({ title, id, complete, description, tags }) => {
   const {
@@ -16,24 +18,9 @@ const Task = ({ title, id, complete, description, tags }) => {
     setStateEdit,
     handleEdit,
     setOpenEdit,
-    openTag,
     handleTag,
-    setOpenTag,
   } = useTask(id, title, description);
-
-  const btnRef = useRef();
-
-  useEffect(() => {
-    const closeTag = (e) => {
-      if (e.path[0] !== btnRef.current) {
-        setOpenTag(false);
-      }
-    };
-
-    document.body.addEventListener("click", closeTag);
-
-    return () => document.body.removeEventListener("click", closeTag);
-  }, []);
+  const { openTag } = useTaskContext();
 
   return (
     <Li>
@@ -66,14 +53,11 @@ const Task = ({ title, id, complete, description, tags }) => {
       )) || (
         <Div>
           <Div>
-            <Img
-              onClick={onComplete}
-              src={
-                (complete &&
-                  "https://icongr.am/clarity/check-circle.svg?size=28&color=currentColor") ||
-                "https://icongr.am/octicons/circle.svg?size=23&color=currentColor"
-              }
-            />
+            {complete ? (
+              <BsPatchCheckFill onClick={onComplete} />
+            ) : (
+              <BsPatchCheck onClick={onComplete} />
+            )}
             <Div text>
               <P>{title}</P>
               <P description>{description}</P>
@@ -111,7 +95,6 @@ const Task = ({ title, id, complete, description, tags }) => {
               src="https://icongr.am/clarity/edit.svg?size=22&color=currentColor"
             />
             <Img
-              ref={btnRef}
               onClick={handleTag}
               src="https://icongr.am/clarity/tag.svg?size=16&color=currentColor"
             />

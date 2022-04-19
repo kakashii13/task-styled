@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTaskContext } from "../context/Context";
 
 const useTask = (id, text, description) => {
@@ -10,12 +10,12 @@ const useTask = (id, text, description) => {
     setOpenModal,
     tagList,
     setTagList,
+    setOpenTag,
   } = useTaskContext();
 
   const [openEdit, setOpenEdit] = useState(false);
   const [stateEdit, setStateEdit] = useState({ title: "", description: "" });
 
-  const [openTag, setOpenTag] = useState(false);
   const [tagState, setTagState] = useState("");
 
   const index = taskList.findIndex((task) => task.id === id);
@@ -124,8 +124,6 @@ const useTask = (id, text, description) => {
     stateEdit,
     setStateEdit,
     handleEdit,
-    openTag,
-    setOpenTag,
     handleTag,
     addTag,
     setTagState,

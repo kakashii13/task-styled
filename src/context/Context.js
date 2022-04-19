@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext, useEffect } from "react";
+import React, { useState, createContext, useContext } from "react";
 
 const taskContext = createContext([]);
 
@@ -9,6 +9,7 @@ const ContextProvider = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const [state, setState] = useState({ title: "", description: "" });
   const [tagList, setTagList] = useState([]);
+  const [openTag, setOpenTag] = useState(false);
 
   return (
     <taskContext.Provider
@@ -21,6 +22,8 @@ const ContextProvider = ({ children }) => {
         setState,
         tagList,
         setTagList,
+        setOpenTag,
+        openTag,
       }}
     >
       {children}

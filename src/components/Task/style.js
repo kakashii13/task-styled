@@ -5,7 +5,7 @@ export const Li = styled.li`
   padding: 10px;
   margin: 10px 0;
   list-style: none;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
   border-radius: 3px;
   position: relative;
   background-color: #fff;
@@ -14,7 +14,7 @@ export const Li = styled.li`
 export const P = styled.p`
   margin: 0 10px;
   width: auto;
-  font-size: ${(props) => (props.description ? "12px" : "14px")};
+  font-size: ${(props) => (props.description ? "13px" : "15px")};
   color: ${(props) => (props.description ? "#888888" : "#000")};
 `;
 
