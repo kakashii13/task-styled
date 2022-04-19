@@ -1,8 +1,8 @@
 import React from "react";
 import { Task } from "../Task/index";
-import { useTaskContext } from "../../context/Context";
 import useFilter from "../../hooks/useFilter";
 import { useParams } from "react-router";
+import { useTaskContext } from "../../context/Context";
 
 const TaskList = () => {
   const { taskList } = useTaskContext();

@@ -12,7 +12,7 @@ export const Li = styled.li`
 `;
 
 export const P = styled.p`
-  margin: 0 10px;
+  margin: ${(props) => (props.description ? "2px 10px" : "0 10px")};
   width: auto;
   font-size: ${(props) => (props.description ? "13px" : "15px")};
   color: ${(props) => (props.description ? "#888888" : "#000")};
@@ -35,4 +35,8 @@ export const Div = styled.div`
   justify-content: space-between;
   align-items: start;
   z-index: 1;
+`;
+
+export const List = styled.ul`
+  display: flex;
 `;

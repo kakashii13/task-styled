@@ -1,26 +1,32 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import useTask from "../../hooks/useTask";
 import { CreateContainer, Input } from "../Modal/styles";
 import { Button } from "../Button";
+import { Div, Img, P, Li, List } from "./style";
 import Tag from "../Tag";
-import { Div, Img, P, Li } from "./style";
-import { BsPatchCheckFill, BsPatchCheck } from "react-icons/bs";
-import { useTaskContext } from "../../context/Context";
+import {
+  BsPatchCheckFill,
+  BsPatchCheck,
+  BsPencil,
+  BsTags,
+  BsTrash,
+} from "react-icons/bs";
+
+import { useTag } from "../../hooks/useTag";
 
 const Task = ({ title, id, complete, description, tags }) => {
   const {
     onComplete,
-    onDelete,
-    onEdit,
     handleEnter,
     openEdit,
     stateEdit,
     setStateEdit,
     handleEdit,
     setOpenEdit,
-    handleTag,
+    onDelete,
+    onEdit,
   } = useTask(id, title, description);
-  const { openTag } = useTaskContext();
+  const { openTag, handleTag } = useTag(id);
 
   return (
     <Li>
@@ -43,6 +49,8 @@ const Task = ({ title, id, complete, description, tags }) => {
                 setStateEdit({ ...stateEdit, description: target.value })
               }
               value={stateEdit.description}
+
+              
             />
           </CreateContainer>
           <Button primary onClick={handleEdit}>
@@ -54,9 +62,12 @@ const Task = ({ title, id, complete, description, tags }) => {
         <Div>
           <Div>
             {complete ? (
-              <BsPatchCheckFill onClick={onComplete} />
+              <BsPatchCheckFill
+                onClick={onComplete}
+                style={{ marginTop: "3px" }}
+              />
             ) : (
-              <BsPatchCheck onClick={onComplete} />
+              <BsPatchCheck onClick={onComplete} style={{ marginTop: "2px" }} />
             )}
             <Div text>
               <P>{title}</P>
@@ -69,19 +80,19 @@ const Task = ({ title, id, complete, description, tags }) => {
                   color: "#707070",
                 }}
               >
-                {tags.length != 0 ? (
+                {tags.length !== 0 ? (
                   <Div style={{ alignItems: "center" }}>
                     <Img
                       style={{ width: "11px", marginRight: "2px" }}
                       src="https://icongr.am/clarity/tag.svg?size=5&color=currentColor"
                     />
-                    <Div>
+                    <List>
                       {tags.map((tag) => (
                         <li style={{ marginRight: "5px" }} key={tag}>
                           {tag}
                         </li>
                       ))}
-                    </Div>
+                    </List>
                   </Div>
                 ) : (
                   ""
@@ -89,20 +100,17 @@ const Task = ({ title, id, complete, description, tags }) => {
               </Div>
             </Div>
           </Div>
-          <Div>
-            <Img
+          <div>
+            <BsPencil
               onClick={onEdit}
-              src="https://icongr.am/clarity/edit.svg?size=22&color=currentColor"
+              style={{ marginRight: "5px", cursor: "pointer" }}
             />
-            <Img
+            <BsTags
               onClick={handleTag}
-              src="https://icongr.am/clarity/tag.svg?size=16&color=currentColor"
+              style={{ marginRight: "5px", cursor: "pointer" }}
             />
-            <Img
-              onClick={onDelete}
-              src="https://icongr.am/fontawesome/trash-o.svg?size=22&color=currentColor"
-            />
-          </Div>
+            <BsTrash onClick={onDelete} style={{ cursor: "pointer" }} />
+          </div>
           {(openTag && <Tag id={id} />) || ""}
         </Div>
       )}

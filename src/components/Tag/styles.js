@@ -13,6 +13,7 @@ export const ModalTag = styled.div`
   z-index: 10;
   background: #fff;
   cursor: pointer;
+  font-size: 13px;
 `;
 
 export const InputTag = styled.input`

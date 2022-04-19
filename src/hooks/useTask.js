@@ -1,22 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useTaskContext } from "../context/Context";
 
-const useTask = (id, text, description) => {
-  const {
-    taskList,
-    setTaskList,
-    state,
-    setState,
-    setOpenModal,
-    tagList,
-    setTagList,
-    setOpenTag,
-  } = useTaskContext();
-
+const useTask = (id, title, description) => {
+  const { state, setState, setOpenModal, taskList, setTaskList } =
+    useTaskContext();
   const [openEdit, setOpenEdit] = useState(false);
   const [stateEdit, setStateEdit] = useState({ title: "", description: "" });
-
-  const [tagState, setTagState] = useState("");
 
   const index = taskList.findIndex((task) => task.id === id);
   const newTask = [...taskList];
@@ -32,7 +21,7 @@ const useTask = (id, text, description) => {
   };
 
   const onAdd = () => {
-    const taskID = taskList.length + 1;
+    const taskID = new Date().getSeconds();
     newTask.push({
       id: taskID,
       title: state.title,
@@ -45,7 +34,7 @@ const useTask = (id, text, description) => {
   };
 
   const handleEnter = (key) => {
-    if (key === "Enter" && state.title != "") {
+    if (key === "Enter" && state.title !== "") {
       onAdd();
     }
   };
@@ -56,7 +45,7 @@ const useTask = (id, text, description) => {
       setOpenEdit(true);
       setOpenModal(false);
       setStateEdit({
-        title: text,
+        title,
         description,
       });
     }
@@ -68,47 +57,6 @@ const useTask = (id, text, description) => {
     newTask[taskIndex].description = stateEdit.description;
     setTaskList(newTask);
     setOpenEdit(false);
-  };
-
-  const handleTag = (e) => {
-    const test = taskList.some((task) => task.id === id);
-    if (test) {
-      setOpenTag((prevState) => !prevState);
-    }
-  };
-
-  const addTag = () => {
-    const isTag = tagList.some((x) => x == tagState);
-    if (tagState == "" || isTag) return;
-    const newTagList = [...tagList];
-    newTagList.push(tagState);
-    setTagList(newTagList);
-    setTagState("");
-  };
-
-  const selectTag = (tag, id, target) => {
-    // filtro por cada id
-    const taskIndex = taskList.findIndex((task) => task.id === id);
-    // chequeo que el tag ya exista
-    const filter = taskList
-      .filter((task) => task.id === id)[0]
-      .tags.includes(tag);
-    // chequeo que no exista tag
-    const filter1 =
-      taskList.filter((task) => task.id === id)[0].tags.length == 0;
-
-    // if (!filter1) return;
-    if (target.checked == false) return;
-
-    if (filter1) {
-      newTask[taskIndex].tags.push(tag);
-      setTaskList(newTask);
-    } else {
-      if (!filter) {
-        newTask[taskIndex].tags.push(tag);
-        setTaskList(newTask);
-      } else return;
-    }
   };
 
   return {
@@ -124,11 +72,7 @@ const useTask = (id, text, description) => {
     stateEdit,
     setStateEdit,
     handleEdit,
-    handleTag,
-    addTag,
-    setTagState,
-    tagState,
-    selectTag,
+    taskList,
   };
 };
 
