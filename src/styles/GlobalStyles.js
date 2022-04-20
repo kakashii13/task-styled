@@ -24,6 +24,10 @@ export const GlobalStyles = createGlobalStyle`
         color: #000;
     }
 
+    svg {
+        cursor: pointer;
+    }
+
     button, input {
         background: transparent;
         border: 0; 

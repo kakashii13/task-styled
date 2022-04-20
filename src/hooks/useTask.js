@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTaskContext } from "../context/Context";
 
 const useTask = (id, title, description) => {
-  const { state, setState, setOpenModal, taskList, setTaskList } =
+  const { state, setState, setOpenModal, taskList, setTaskList, setComplete } =
     useTaskContext();
   const [openEdit, setOpenEdit] = useState(false);
   const [stateEdit, setStateEdit] = useState({ title: "", description: "" });
@@ -13,6 +13,12 @@ const useTask = (id, title, description) => {
   const onComplete = () => {
     newTask[index].complete = !newTask[index].complete;
     setTaskList(newTask);
+    if (newTask[index].complete == true) {
+      setComplete(true);
+    }
+    setTimeout(() => {
+      setComplete(false);
+    }, 2000);
   };
 
   const onDelete = () => {

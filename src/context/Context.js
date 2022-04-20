@@ -13,6 +13,8 @@ const ContextProvider = ({ children }) => {
     []
   );
 
+  const [isComplete, setComplete] = useState(false);
+
   const { item: tagList, saveItem: setTagList } = useLocalStorage("Tags", []);
 
   return (
@@ -26,6 +28,8 @@ const ContextProvider = ({ children }) => {
         setTagList,
         taskList,
         setTaskList,
+        isComplete,
+        setComplete,
       }}
     >
       {children}

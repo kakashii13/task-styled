@@ -49,8 +49,6 @@ const Task = ({ title, id, complete, description, tags }) => {
                 setStateEdit({ ...stateEdit, description: target.value })
               }
               value={stateEdit.description}
-
-              
             />
           </CreateContainer>
           <Button primary onClick={handleEdit}>
@@ -101,15 +99,9 @@ const Task = ({ title, id, complete, description, tags }) => {
             </Div>
           </Div>
           <div>
-            <BsPencil
-              onClick={onEdit}
-              style={{ marginRight: "5px", cursor: "pointer" }}
-            />
-            <BsTags
-              onClick={handleTag}
-              style={{ marginRight: "5px", cursor: "pointer" }}
-            />
-            <BsTrash onClick={onDelete} style={{ cursor: "pointer" }} />
+            <BsPencil onClick={onEdit} style={{ marginRight: "5px" }} />
+            <BsTags onClick={handleTag} style={{ marginRight: "5px" }} />
+            <BsTrash onClick={onDelete} />
           </div>
           {(openTag && <Tag id={id} />) || ""}
         </Div>
