@@ -4,7 +4,6 @@ import { useTaskContext } from "../context/Context";
 export const useTag = (id) => {
   const { taskList, setTaskList, tagList, setTagList } = useTaskContext();
   const [tagState, setTagState] = useState("");
-
   const [openTag, setOpenTag] = useState(false);
   const newTask = [...taskList];
 
@@ -53,9 +52,9 @@ export const useTag = (id) => {
     handleTag,
     addTag,
     selectTag,
-    openTag,
-    setOpenTag,
     tagState,
     setTagState,
+    openTag,
+    setOpenTag,
   };
 };

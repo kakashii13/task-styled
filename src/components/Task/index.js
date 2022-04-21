@@ -26,7 +26,7 @@ const Task = ({ title, id, complete, description, tags }) => {
     onDelete,
     onEdit,
   } = useTask(id, title, description);
-  const { openTag, handleTag } = useTag(id);
+  const { handleTag, openTag } = useTag(id);
 
   return (
     <Li>

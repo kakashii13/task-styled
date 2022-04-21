@@ -5,23 +5,10 @@ import { ModalTag, InputTag, ListTag, CreateTag } from "./styles";
 
 const Tag = ({ id }) => {
   const { tagList } = useTaskContext();
-  const { addTag, setTagState, tagState, selectTag, setOpenTag } = useTag(id);
-
-  const domRef = useRef();
-
-  useEffect(() => {
-    const closeTag = (e) => {
-      if (!domRef.current.contains(e.target)) {
-        setOpenTag(false);
-      }
-    };
-
-    document.addEventListener("mousedown", closeTag);
-    return () => document.removeEventListener("mousedown", closeTag);
-  }, []);
+  const { addTag, setTagState, tagState, selectTag } = useTag(id);
 
   return (
-    <ModalTag ref={domRef}>
+    <ModalTag>
       <InputTag
         placeholder="Add tag"
         autoFocus

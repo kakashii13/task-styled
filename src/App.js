@@ -1,5 +1,4 @@
 import ContextProvider from "./context/Context";
-import NavBar from "./components/NavBar";
 import Category from "./components/Category/Category";
 import { Main } from "./pages/Main";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -12,11 +11,11 @@ function App() {
       <>
         <ContextProvider>
           <GlobalStyles />
-          <NavBar />
           <Category />
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/:category" element={<Main />} />
+            <Route path="/search/:id" element={<Main />} />
           </Routes>
           <Alert />
         </ContextProvider>

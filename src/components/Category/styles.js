@@ -21,6 +21,7 @@ export const Tag = styled.li`
   margin-right: 10px;
   opacity: 0.7;
   color: #344955;
+  z-index: 1;
 
   &:hover {
     opacity: 1;
